@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: gymbuddy-api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: training-route
+          predicates:
+            - Path=/workouts/**
+          uri: ${TRAINING_URL:http://localhost:8081}
+        - id: runner-route
+          predicates:
+            - Path=/workout-runner/**
+          uri: ${RUNNER_URL:http://localhost:8082}
+
+server:
+  port: 8080
